@@ -26,7 +26,8 @@ except requests.exceptions.JSONDecodeError as e:
     (output_dir / "json_decode_error.txt").write_text(str(e), encoding="utf-8")
     print(f"Error: Failed to parse JSON - {e}")
     print(f"Response: {response.text[:1000]}")
-    print(response.headers)
+    for key in response.headers:
+        print(f"{key}: {response.headers.get(key)}")
     sys.exit(1)
 
 if response.status_code != 200:
